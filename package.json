@@ -13,6 +13,7 @@
     "react-ga": "^2.2.0",
     "react-loadable": "^4.0.3",
     "react-redux": "^5.0.5",
+    "react-render-html": "^0.3.0",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-toolbox": "^2.0.0-beta.12",

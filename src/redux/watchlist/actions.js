@@ -7,9 +7,9 @@ const watchActions = {
   UPDATE_WATCHLIST: 'UPDATE_WATCHLIST',
   DISMISS_SUCCESS_MESSAGE: 'DISMISS_SUCCESS_MESSAGE',
 
-  watchlist: (data, ref) => ({
+  watchlist: (uid, show) => ({
     type: watchActions.WATCHLIST,
-    payload: { data, ref },
+    payload: { uid, show },
   }),
 
   watchlistSuccss: status => ({

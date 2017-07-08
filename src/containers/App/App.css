@@ -15,6 +15,18 @@
   align-items: center;
 }
 
+.tvdetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+}
+
+.tvsummary {
+  width: 400px;
+  margin: 40px;
+}
+
 .tvgrid {
   display: flex;
   flex-wrap: wrap;

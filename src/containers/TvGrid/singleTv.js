@@ -7,28 +7,8 @@ import Dialog from 'react-toolbox/lib/dialog/Dialog';
 import watchActions from '../../redux/watchlist/actions';
 import { getAuth } from '../../redux/auth/selectors';
 import { getWatchlist } from '../../redux/watchlist/selectors';
+import { TvDetails } from '../../components/tvDetails';
 import config from '../../config';
-
-const TvDetails = props => (
-  <div>
-    <Button
-      icon={
-        props.alreadyInTheList ? 'notifications_off' : 'notifications_active'
-      }
-      onClick={props.addOrRmoveWatchList}
-      primary={props.alreadyInTheList === false}>
-      {props.alreadyInTheList ? 'Remove from watchlist' : 'Add to watchlist'}
-    </Button>
-
-    <h2>{props.name}</h2>
-    <img
-      height="300px"
-      src={`${props.image.original || null}`}
-      alt={props.name}
-    />
-    <p>{props.summary}</p>
-  </div>
-);
 
 class SingleTv extends Component {
   componentWillMount() {
@@ -40,16 +20,7 @@ class SingleTv extends Component {
     const {
       showItem,
     } = this.props.history.location.state;
-    console.log('add');
-    // this.props.addOrRemove(
-    //   {
-    //     id,
-    //     user: {
-    //       [uid]: true,
-    //     },
-    //   },
-    //   `/watchlist/${uid}/${id}`,
-    // );
+    this.props.updateWatchlist(uid, showItem);
   };
   close = () => {
     this.props.history.goBack();
@@ -71,7 +42,6 @@ class SingleTv extends Component {
       <div>
         {surfaceRender
           ? <div>
-              <h2>#{id}</h2>
               <TvDetails {...options} />
             </div>
           : <div>
@@ -82,7 +52,6 @@ class SingleTv extends Component {
                 title={options.name}>
                 <TvDetails {...options} />
               </Dialog>
-
             </div>}
       </div>
     );
@@ -95,6 +64,6 @@ export default connect(
     myshows: getWatchlist(state).myshows,
   }),
   {
-    addOrRemove: watchActions.watchlist,
+    updateWatchlist: watchActions.watchlist,
   },
 )(SingleTv);

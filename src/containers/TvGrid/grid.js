@@ -8,23 +8,10 @@ import {
 } from 'react-toolbox/lib/card';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { addOrRemove } from '../../reducers/watchlist';
-// import { firebaseDB } from '../../helper/firebase';
 import Button from 'react-toolbox/lib/button/Button';
 import config from '../../config';
 
 export default class TvGrid extends Component {
-  handleWatchList = showItem => {
-    const { uid } = this.props.user;
-    const uniqueRef = `watchlist/${uid}/${showItem.ids.tvdb}`;
-    const data = {
-      uid,
-      ...showItem.ids,
-      ...showItem,
-    };
-    this.props.addOrRemove(data, uniqueRef);
-  };
-
   loadDefaultImage = event => {
     event.target.src = 'http://via.placeholder.com/214x321';
   };
@@ -41,8 +28,7 @@ export default class TvGrid extends Component {
         to={{
           pathname: `/tv/${showItem.id}`,
           state: { modal: true, showItem },
-        }}
-      >
+        }}>
         <Card>
           <img
             src={`${image}`}
@@ -64,11 +50,11 @@ export default class TvGrid extends Component {
       showLoadMore,
       showViewAll,
     } = this.props;
+
     return (
       <div>
         <div className="tvTitle">
           <h2>{title}</h2>
-          {showViewAll ? <a href="#">View All</a> : null}
         </div>
         <div className="tvgrid">
           {series && series.length ? series.map(this.showCard) : null}
@@ -84,11 +70,3 @@ export default class TvGrid extends Component {
     );
   }
 }
-
-//
-// <Link
-//   to={{
-//     pathname: `/tv/${showItem.id}`,
-//     state: { modal: true, showItem },
-//   }}
-// >

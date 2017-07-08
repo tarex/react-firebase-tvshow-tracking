@@ -12,12 +12,17 @@ import watchActions from './actions';
 import { RSF, FirebaseAuth } from '../../helper/firebase';
 
 function* handleWatchlist({ payload }) {
-  const { ref, data } = payload;
-  const existingItem = yield call(RSF.database.read, ref);
+  const { uid, show } = payload;
+  const watchListRef = `watchlist/${uid}/${show.id}`;
+  const seriesUserRef = `seriesUser/${show.id}/${uid}`;
+  const existingItem = yield call(RSF.database.read, watchListRef);
+
   if (existingItem) {
-    yield call(RSF.database.delete, ref);
+    yield call(RSF.database.delete, watchListRef);
+    yield call(RSF.database.delete, seriesUserRef);
   } else {
-    yield call(RSF.database.update, ref, data);
+    yield call(RSF.database.update, watchListRef, show);
+    yield call(RSF.database.update, seriesUserRef, true);
   }
   yield put(watchActions.watchlistSuccss(existingItem ? 'remove' : 'add'));
 }
