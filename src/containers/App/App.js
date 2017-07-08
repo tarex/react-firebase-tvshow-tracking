@@ -31,10 +31,6 @@ class App extends Component {
     sidebarPinned: false,
   };
 
-  componentDidMount() {
-    // this.props.loadShows();
-  }
-
   toggleDrawerActive = () => {
     this.setState({ drawerActive: !this.state.drawerActive });
   };

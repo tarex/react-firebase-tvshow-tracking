@@ -1,3 +1,9 @@
+.logo {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+}
 .navigation {
   flex-grow: 1;
   text-align: right;

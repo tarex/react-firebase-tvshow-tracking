@@ -11,11 +11,10 @@ import Button from 'react-toolbox/lib/button/Button';
 
 export default ({ login, toggleDrawerActive, loggedIn, user, logout }) => (
   <AppBar fixed>
-    <Link to="/">TV APP</Link>
+    <Link to="/" className="logo">TV APP</Link>
     <Navigation type="horizontal" className="navigation">
       {loggedIn
         ? <div>
-            {/* <Input withIcon className="searchbar" /> */}
             <Link to="/watchlist">
               <Button icon="inbox" label="My Watchlist" flat inverse />
             </Link>

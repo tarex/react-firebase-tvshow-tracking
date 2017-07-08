@@ -19,6 +19,7 @@ class LandingPage extends Component {
     return (
       <div>
         <h1>Pick your favorite tv shows</h1>
+        <span>you will recieve notification before the airtime</span>
         <TvGrid
           title="Running Shows"
           series={showList}
