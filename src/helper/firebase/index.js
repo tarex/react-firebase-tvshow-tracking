@@ -3,11 +3,14 @@ import ReduxSagaFirebase from 'redux-saga-firebase';
 import config from '../../config';
 
 const FirebaseApp = firebase.initializeApp(config.firebase);
-export const FirebaseDB = firebase.database();
-firebase.database.enableLogging(false, false);
-export const FirebaseAuth = firebase.auth();
+
 export const RSF = new ReduxSagaFirebase(FirebaseApp);
-const messaging = firebase.messaging();
+
+export const FirebaseDB = firebase.database();
+// firebase.database.enableLogging(false, false);
+export const FirebaseAuth = firebase.auth();
+export const FirebaseMsg = firebase.messaging();
+
 export const getFirebaseAuthProvider = provider => {
   switch (provider) {
     case 'facebook':
@@ -23,4 +26,22 @@ export const getFirebaseAuthProvider = provider => {
   }
 };
 
-export { firebase, messaging };
+export const listenFCMNotification = () =>
+  FirebaseMsg.onMessage(payload => payload.notification);
+
+export const getFCMPermission = () =>
+  FirebaseMsg.requestPermission()
+    .then(() => FirebaseMsg.getToken())
+    .catch(err => {
+      console.log(err.message);
+    });
+
+// did't bothered actions
+export const setFCMPerssionToken = uid => {
+  getFCMPermission().then(token => {
+    console.log(uid);
+    FirebaseDB.ref(`users/${uid}/tokens/${token}`).set(true);
+  });
+};
+
+export { firebase };

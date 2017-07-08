@@ -10,14 +10,9 @@ const initialState = new Record({
 
 const getShowFormat = shows => {
   const allShows = [];
-  shows.forEach(tv => {
+  Object.keys(shows).forEach(showId => {
     allShows.push({
-      ...tv.show,
-      airstamp: tv.airstamp,
-      episodeName: tv.name,
-      episodeNumber: tv.number,
-      episodeRuntime: tv.runtime,
-      season: tv.season,
+      ...shows[showId],
     });
   });
   return allShows;

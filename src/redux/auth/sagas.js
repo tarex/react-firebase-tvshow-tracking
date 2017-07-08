@@ -1,7 +1,10 @@
 import { takeEvery, put, call, fork, take, all } from 'redux-saga/effects';
 import authActions from './actions';
-import Auth from './index';
-import { RSF, getFirebaseAuthProvider } from '../../helper/firebase';
+import {
+  RSF,
+  getFirebaseAuthProvider,
+  setFCMPerssionToken,
+} from '../../helper/firebase';
 
 function* watchLogin({ payload }) {
   try {
@@ -26,8 +29,12 @@ function* syncUserSaga() {
   const channel = yield call(RSF.auth.channel);
   while (true) {
     const { error, user } = yield take(channel);
-    if (user) yield put(authActions.syncUser(user));
-    else yield put(authActions.syncUser(null));
+    if (user) {
+      yield put(authActions.syncUser(user));
+      yield setFCMPerssionToken(user.uid);
+    } else {
+      yield put(authActions.syncUser(null));
+    }
   }
 }
 

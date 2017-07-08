@@ -5,9 +5,9 @@ const showActions = {
 
   LOAD_SHOW_MODAL: 'LOAD_SHOW_MODAL',
 
-  loadShows: (list, day = 0) => ({
+  loadShows: (startFrom, limit) => ({
     type: showActions.LOAD_SHOWS,
-    payload: { list, day },
+    payload: { startFrom, limit },
   }),
 
   loadShowModal: data => ({
@@ -15,10 +15,9 @@ const showActions = {
     payload: { data },
   }),
 
-  loadSuccess: (list, shows) => ({
+  loadSuccess: shows => ({
     type: showActions.LOAD_SHOWS_SUCCESS,
     payload: {
-      list,
       shows,
     },
   }),

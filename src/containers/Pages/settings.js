@@ -11,26 +11,7 @@ class Settings extends Component {
   componentDidMount() {
     this.listenFCMNotification();
   }
-  listenFCMNotification = () => {
-    const self = this;
-    messaging.onMessage(payload => {
-      self.setState({ notification: payload.notification });
-    });
-  };
-  getFCMPermission = () => {
-    messaging
-      .requestPermission()
-      .then(() => {
-        console.log('have permission');
-        return messaging.getToken();
-      })
-      .then(token => {
-        console.log(token);
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-  };
+
   checkDB = () => {
     const dummySeriesUser = {
       84: {

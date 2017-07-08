@@ -9,6 +9,8 @@ import Panel from 'react-toolbox/lib/layout/Panel';
 import Snackbar from 'react-toolbox/lib/snackbar/Snackbar';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
 
+import { setFCMPerssionToken } from '../../helper/firebase';
+
 import AuthActions from '../../redux/auth/actions';
 import WatchActions from '../../redux/watchlist/actions';
 import ShowActions from '../../redux/show/actions';
@@ -30,7 +32,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.loadShows();
+    // this.props.loadShows();
   }
 
   toggleDrawerActive = () => {

@@ -12,15 +12,20 @@ import config from '../../config';
 const TvDetails = props => (
   <div>
     <Button
-      icon={props.alreadyInTheList ? 'delete' : 'add'}
+      icon={
+        props.alreadyInTheList ? 'notifications_off' : 'notifications_active'
+      }
       onClick={props.addOrRmoveWatchList}
-      primary={props.alreadyInTheList === false}
-    >
+      primary={props.alreadyInTheList === false}>
       {props.alreadyInTheList ? 'Remove from watchlist' : 'Add to watchlist'}
     </Button>
 
     <h2>{props.name}</h2>
-    {/* <img src={`${props.image.original || null}`} alt={props.name} /> */}
+    <img
+      height="300px"
+      src={`${props.image.original || null}`}
+      alt={props.name}
+    />
     <p>{props.summary}</p>
   </div>
 );
@@ -33,22 +38,18 @@ class SingleTv extends Component {
     const { id } = this.props.match.params;
     const { uid } = this.props.user;
     const {
-      name,
-      overview,
-      poster_path,
-      backdrop_path,
-    } = this.props.history.location.state.showItem;
-    this.props.addOrRemove(
-      {
-        id,
-        name,
-        overview,
-        poster_path,
-        backdrop_path,
-        addedIntoWatchList: new Date().getTime(),
-      },
-      `/watchlist/${uid}/${id}`,
-    );
+      showItem,
+    } = this.props.history.location.state;
+    console.log('add');
+    // this.props.addOrRemove(
+    //   {
+    //     id,
+    //     user: {
+    //       [uid]: true,
+    //     },
+    //   },
+    //   `/watchlist/${uid}/${id}`,
+    // );
   };
   close = () => {
     this.props.history.goBack();
@@ -56,19 +57,13 @@ class SingleTv extends Component {
   render() {
     const { id } = this.props.match.params;
     const {
-      name,
-      overview,
-      poster_path,
-      backdrop_path,
-    } = this.props.history.location.state.showItem;
+      showItem,
+    } = this.props.history.location.state;
     const surfaceRender = this.props.history.action === 'POP';
     const showKeys = Object.keys(this.props.myshows || {});
     const alreadyInTheList = showKeys.length && showKeys.indexOf(id) !== -1;
     const options = {
-      name,
-      overview,
-      poster_path,
-      backdrop_path,
+      ...showItem,
       alreadyInTheList,
       addOrRmoveWatchList: this.addOrRmoveWatchList,
     };
@@ -84,8 +79,7 @@ class SingleTv extends Component {
                 active={id}
                 onEscKeyDown={this.close}
                 onOverlayClick={this.close}
-                title={options.name}
-              >
+                title={options.name}>
                 <TvDetails {...options} />
               </Dialog>
 

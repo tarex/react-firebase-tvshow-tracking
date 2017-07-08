@@ -9,11 +9,10 @@ import TvGrid from '../TvGrid/grid';
 import showActions from '../../redux/show/actions';
 
 class LandingPage extends Component {
-  componentDidMount() {}
   loadMore = type => {
-    // const list = this.props.shows[type];
-    //this.props.loadShows(type);
-    console.log('load more');
+    const { showList } = this.props.shows;
+    const startFrom = showList[showList.length - 1].id;
+    this.props.loadShows(startFrom);
   };
   render() {
     const { showList } = this.props.shows;
@@ -27,7 +26,6 @@ class LandingPage extends Component {
           showLoadMore
           showViewAll
           loadMore={this.loadMore}
-          limit="11"
         />
       </div>
     );
@@ -40,26 +38,3 @@ export default connect(
   }),
   { loadShows: showActions.loadShows },
 )(LandingPage);
-
-{
-  /*
-
-<TvGrid
-  title="Recent"
-  type="recentList"
-  series={recentList.results}
-  loadMore={this.loadMore}
-  showLoadMore
-  showViewAll
-  limit="7"
-/>
-<TvGrid
-  title="Top rated"
-  type="topratedList"
-  series={topratedList.results}
-  loadMore={this.loadMore}
-  showLoadMore
-  showViewAll
-  limit="7"
-/> */
-}

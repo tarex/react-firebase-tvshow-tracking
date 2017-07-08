@@ -13,11 +13,11 @@ const getFirebaseData = url =>
   new Promise(resolve =>
     admin.database().ref(url).once('value').then(snap => resolve(snap.val())));
 
-const getUsersDate = timzone => {
-  const date = new Date();
-  const utc = date.getTime() + date.getTimezoneOffset() * 60000;
-  return new Date(utc + 3600000 * timzone); // hour * difference +-
-};
+// const getUsersDate = timzone => {
+//   const date = new Date();
+//   const utc = date.getTime() + date.getTimezoneOffset() * 60000;
+//   return new Date(utc + 3600000 * timzone); // hour * difference +-
+// };
 
 const getSeriesWithTokens = (
   dailylist,
@@ -31,9 +31,8 @@ const getSeriesWithTokens = (
       const possibleUsers = Object.keys(seriesWithUser[showId].users);
       possibleUsers.length &&
         possibleUsers.forEach(userId => {
-          const usersDate = getUsersDate(Number(users[userId].timeStamp));
           if (
-            new Date(dailylist[showId].airstamp) - usersDate < 15 * 60000 // 15 min
+            new Date(dailylist[showId].airstamp) - new Date() < 15 * 60000 // 15 min
           ) {
             notificationCandidate[showId] = {
               tokens: {
@@ -76,7 +75,7 @@ app.get('/', async (req, res) => {
   // send push notification.
 
   res.json({
-    watchlist,
+    seriesWithTokens,
   });
 });
 
