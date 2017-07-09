@@ -24,3 +24,4 @@ yarn-error.log*
 
 # auto generated
 /functions
+/src/config.js
