@@ -8,9 +8,11 @@ export default () => new Promise((resolve, reject) => {
   store.dispatch(ShowActions.loadShows());
   const unsub = FirebaseAuth.onAuthStateChanged(
     user => {
-      store.dispatch(AuthActions.syncUser(user));
-      store.dispatch(WatchActions.listen(user));
-      setFCMPerssionToken(user.uid);
+      if (user !== null) {
+        store.dispatch(AuthActions.syncUser(user));
+        store.dispatch(WatchActions.listen(user));
+        setFCMPerssionToken(user.uid);
+      }
       unsub();
       resolve();
     },

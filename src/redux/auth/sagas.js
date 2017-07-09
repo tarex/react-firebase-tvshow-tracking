@@ -5,6 +5,7 @@ import {
   getFirebaseAuthProvider,
   setFCMPerssionToken,
 } from '../../helper/firebase';
+import WatchActions from '../watchlist/actions';
 
 function* watchLogin({ payload }) {
   try {
@@ -31,6 +32,7 @@ function* syncUserSaga() {
     const { error, user } = yield take(channel);
     if (user) {
       yield put(authActions.syncUser(user));
+      yield put(WatchActions.listen(user));
       yield setFCMPerssionToken(user.uid);
     } else {
       yield put(authActions.syncUser(null));

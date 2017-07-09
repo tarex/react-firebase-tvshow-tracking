@@ -16,11 +16,15 @@ class SingleTv extends Component {
   }
   addOrRmoveWatchList = () => {
     const { id } = this.props.match.params;
-    const { uid } = this.props.user;
     const {
       showItem,
     } = this.props.history.location.state;
-    this.props.updateWatchlist(uid, showItem);
+    if (this.props.user != null) {
+      const { uid } = this.props.user;
+      this.props.updateWatchlist(uid, showItem);
+    } else {
+      alert('Please login -> ');
+    }
   };
   close = () => {
     this.props.history.goBack();
@@ -46,7 +50,7 @@ class SingleTv extends Component {
             </div>
           : <div>
               <Dialog
-                active={id}
+                active={id ? true : false}
                 onEscKeyDown={this.close}
                 onOverlayClick={this.close}
                 title={options.name}>
