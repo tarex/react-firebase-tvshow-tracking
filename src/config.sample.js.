@@ -1,0 +1,18 @@
+const config = {
+  tmdb: {
+    key: '',
+    url: '',
+    imageUrl: '',
+  },
+  tvurl: 'http://api.tvmaze.com',
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+  },
+};
+
+export default config;
