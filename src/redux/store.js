@@ -20,5 +20,6 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : f => f,
   ),
 );
+
 sagaMiddleware.run(rootSaga);
 export { store, history };

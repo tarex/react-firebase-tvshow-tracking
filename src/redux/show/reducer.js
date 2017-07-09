@@ -6,6 +6,7 @@ const initialState = new Record({
   showList: [],
   day: 0, // today
   error: null,
+  suggestions: [],
 });
 
 const getShowFormat = shows => {
@@ -14,6 +15,14 @@ const getShowFormat = shows => {
     allShows.push({
       ...shows[showId],
     });
+  });
+  return allShows;
+};
+
+const getSearchFormat = shows => {
+  const allShows = {};
+  shows.forEach(({ show }) => {
+    allShows[show.id] = { ...show };
   });
   return allShows;
 };
@@ -36,6 +45,11 @@ export default function showReducer(
 
     case showActions.LOAD_SHOWS_ERROR:
       return state.merge({ loading: false, error: payload.error });
+
+    case showActions.SEARCH_SUCCESS:
+      return state.merge({
+        suggestions: getSearchFormat(payload.data),
+      });
 
     default:
       return state;

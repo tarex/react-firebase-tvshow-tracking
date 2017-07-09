@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import Button from 'react-toolbox/lib/button/Button';
 import Sidebar from 'react-toolbox/lib/layout/Sidebar';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
@@ -11,8 +12,23 @@ import { TvDetails } from '../../components/tvDetails';
 import config from '../../config';
 
 class SingleTv extends Component {
-  componentWillMount() {
-    const { id } = this.props.match.params;
+  state = {
+    trailerId: null,
+  };
+  componentDidMount() {
+    const self = this;
+    const {
+      showItem,
+    } = this.props.history.location.state;
+    if (showItem.id) {
+      const search = encodeURIComponent(`${showItem.name} Trailer`);
+      const youtubeSearchUrl = `${config.youtube.url}/search?q=${search}&key=${config.youtube.apiKey}&part=snippet`;
+      fetch(youtubeSearchUrl).then(res => res.json()).then(res => {
+        self.setState({
+          trailerId: res.items.length ? res.items[0].id.videoId : null,
+        });
+      });
+    }
   }
   addOrRmoveWatchList = () => {
     const { id } = this.props.match.params;
@@ -41,6 +57,7 @@ class SingleTv extends Component {
       ...showItem,
       alreadyInTheList,
       addOrRmoveWatchList: this.addOrRmoveWatchList,
+      videoId: this.state.trailerId,
     };
     return (
       <div>
@@ -52,8 +69,7 @@ class SingleTv extends Component {
               <Dialog
                 active={id ? true : false}
                 onEscKeyDown={this.close}
-                onOverlayClick={this.close}
-                title={options.name}>
+                onOverlayClick={this.close}>
                 <TvDetails {...options} />
               </Dialog>
             </div>}

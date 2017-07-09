@@ -88,11 +88,11 @@ export const api = functions.https.onRequest((req, res) => {
 
 // Hooks
 export const saveUserForSettings = functions.auth.user().onCreate(event => {
-  const { uid, displayName, email, photoURL } = event.data;
+  const { uid } = event.data;
   const userRef = admin.database().ref(`/users/${uid}`);
   return userRef.set({
-    displayName,
-    email,
-    photoURL,
+    displayName: event.data.displayName,
+    email: event.data.email || '',
+    photoURL: event.data.photoURL || '',
   });
 });

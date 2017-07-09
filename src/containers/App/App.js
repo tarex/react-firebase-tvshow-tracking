@@ -104,7 +104,3 @@ export default connect(
     logout: AuthActions.logout,
   },
 )(App);
-
-// {/*
-
-// */}

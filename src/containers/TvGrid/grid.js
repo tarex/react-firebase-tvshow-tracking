@@ -57,7 +57,7 @@ export default class TvGrid extends Component {
           <h2>{title}</h2>
         </div>
         <div className="tvgrid">
-          {series && series.length ? series.map(this.showCard) : null}
+          {series.map(this.showCard)}
         </div>
         {showLoadMore
           ? <div className="loadMore">

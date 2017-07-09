@@ -39,8 +39,9 @@ export const getFCMPermission = () =>
 // did't bothered actions
 export const setFCMPerssionToken = uid => {
   getFCMPermission().then(token => {
-    console.log(uid);
-    FirebaseDB.ref(`users/${uid}/tokens/${token}`).set(true);
+    if (token !== undefined || token !== null) {
+      FirebaseDB.ref(`users/${uid}/tokens/${token}`).set(true);
+    }
   });
 };
 

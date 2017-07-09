@@ -9,14 +9,20 @@ import Avatar from 'react-toolbox/lib/avatar/Avatar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import Button from 'react-toolbox/lib/button/Button';
 
+const Logo = props => (
+  <Link to="/" className="logo">
+    <Button label="TV App" flat inverse />
+  </Link>
+);
+
 export default ({ login, toggleDrawerActive, loggedIn, user, logout }) => (
   <AppBar fixed>
-    <Link to="/" className="logo">TV APP</Link>
+    <Logo />
     <Navigation type="horizontal" className="navigation">
       {loggedIn
         ? <div>
             <Link to="/watchlist">
-              <Button icon="inbox" label="My Watchlist" flat inverse />
+              <Button icon="inbox" label="My List" flat inverse />
             </Link>
             {user ? <Button flat inverse>{user.displayName}</Button> : null}
             <IconMenu icon="more_vert" position="topRight" menuRipple inverse>
