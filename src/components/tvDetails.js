@@ -1,7 +1,9 @@
 import React from 'react';
-import renderHTML from 'react-render-html';
 import Button from 'react-toolbox/lib/button/Button';
 
+function createMarkup(html) {
+  return { __html: html };
+}
 export const TvDetails = props => (
   <div>
     <div className="tvdetails">
@@ -31,7 +33,7 @@ export const TvDetails = props => (
             : 'Add to watchlist'}
         </Button>
         <h2>{props.name}</h2>
-        {renderHTML(props.summary)}
+        <div dangerouslySetInnerHTML={createMarkup(props.summary)} />
       </div>
     </div>
 
