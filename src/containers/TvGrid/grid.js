@@ -22,22 +22,15 @@ export default class TvGrid extends Component {
 
     const image = showItem.image ? showItem.image.original : null;
     return (
-      <Link
-        className="showItem"
-        key={showIndex}
-        to={{
-          pathname: `/tv/${showItem.id}`,
-          state: { modal: true, showItem },
-        }}>
-        <Card>
-          <img
-            src={`${image}`}
-            style={{ width: '100%' }}
-            onError={this.loadDefaultImage}
-          />
-          <h4 className="showItemTitle">{showItem.name}</h4>
-        </Card>
-      </Link>
+      <Card className="showItem">
+        <Button icon="notifications_active" floating mini />
+        <img
+          src={`${image}`}
+          style={{ width: '100%' }}
+          onError={this.loadDefaultImage}
+        />
+        <h4 className="showItemTitle">{showItem.name}</h4>
+      </Card>
     );
   };
 
@@ -69,4 +62,14 @@ export default class TvGrid extends Component {
       </div>
     );
   }
+}
+
+{
+  /* <Link
+  className="showItem"
+  key={showIndex}
+  to={{
+    pathname: `/tv/${showItem.id}`,
+    state: { modal: true, showItem },
+  }}> */
 }

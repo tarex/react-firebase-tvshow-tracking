@@ -172,6 +172,12 @@
   cursor: pointer;
 }
 
+.showItem button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .showItem > div{
   height: 100%;
 }
