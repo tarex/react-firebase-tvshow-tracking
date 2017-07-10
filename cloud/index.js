@@ -10,14 +10,12 @@ const app = express();
 app.use(cors({ origin: true }));
 
 const getFirebaseData = url =>
-  new Promise(resolve =>
-    admin.database().ref(url).once('value').then(snap => resolve(snap.val())));
-
-// const getUsersDate = timzone => {
-//   const date = new Date();
-//   const utc = date.getTime() + date.getTimezoneOffset() * 60000;
-//   return new Date(utc + 3600000 * timzone); // hour * difference +-
-// };
+  new Promise((resolve, reject) =>
+    admin
+      .database()
+      .ref(url)
+      .once('value')
+      .then(snap => resolve(snap.val()))).catch(error => reject(error));
 
 const getSeriesWithTokens = (
   dailylist,
@@ -28,51 +26,64 @@ const getSeriesWithTokens = (
   new Promise((resolve, reject) => {
     const notificationCandidate = {};
     possibleNotificationCandidate.forEach(showId => {
-      const possibleUsers = Object.keys(seriesWithUser[showId].users);
+      notificationCandidate[showId] = {};
+      const possibleUsers = Object.keys(seriesWithUser[showId]);
       possibleUsers.length &&
         possibleUsers.forEach(userId => {
-          if (
-            new Date(dailylist[showId].airstamp) - new Date() < 15 * 60000 // 15 min
-          ) {
-            notificationCandidate[showId] = {
-              tokens: {
-                ...notificationCandidate[showId].tokens,
-                ...Object.keys(users[userId].tokens),
-              },
-            };
+          //new Date(dailylist[showId].airstamp) - new Date() < 15 * 60000
+          if (1 == 1) {
+            notificationCandidate[showId]['tokens'] = [
+              ...('tokens' in notificationCandidate[showId]
+                ? notificationCandidate[showId].tokens
+                : {}),
+              ...Object.keys(users[userId].tokens),
+            ];
           }
         });
-      notificationCandidate[showId] = {
-        ...notificationCandidate[showId],
-        details: {
-          ...dailylist[showId],
-        },
-      };
+
+      notificationCandidate[showId]['details'] = dailylist[showId];
     });
+    resolve(notificationCandidate);
   });
 
-// every 15 min
 app.get('/', async (req, res) => {
   // need authorization
-  const seriesWithUser = await getFirebaseData('dummySeriesUser');
+  const seriesWithUser = await getFirebaseData('seriesUser');
   const users = await getFirebaseData('users');
   const dailylist = await getFirebaseData('dailylist');
-  const timezoneUserList = await getFirebaseData('dummyTimezoneUser');
+
   const seriesWithUserIds = new Set(Object.keys(seriesWithUser));
   const dailylistIds = new Set(Object.keys(dailylist));
 
   const possibleNotificationCandidate = new Set(
-    [...watchlistIds].filter(x => dailylistIds.has(x)),
+    [...seriesWithUserIds].filter(x => dailylistIds.has(x)),
   );
-  const notificationCandidate = {};
+
   const seriesWithTokens = await getSeriesWithTokens(
     dailylist,
     possibleNotificationCandidate,
     seriesWithUser,
     users,
   );
-
-  // send push notification.
+  Object.keys(seriesWithTokens).forEach(seriesId => {
+    const series = seriesWithTokens[seriesId].details;
+    const payload = {
+      notification: {
+        title: series.name,
+        body: series.episodeName,
+        click_action: `https://tvapp-ea52d.firebaseapp.com/tv/${series.id}`,
+      },
+    };
+    admin
+      .messaging()
+      .sendToDevice(seriesWithTokens[seriesId].tokens, payload)
+      .then(response => {
+        console.log(series.name);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  });
 
   res.json({
     seriesWithTokens,
@@ -96,3 +107,13 @@ export const saveUserForSettings = functions.auth.user().onCreate(event => {
     photoURL: event.data.photoURL || '',
   });
 });
+
+//
+// notificationCandidate[showId] = {
+//   tokens: {
+//     ...(notificationCandidate[showId]
+//       ? notificationCandidate[showId].tokens
+//       : {}),
+//     ...Object.keys(users[userId].tokens),
+//   },
+// };

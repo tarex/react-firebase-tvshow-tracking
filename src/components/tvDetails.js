@@ -41,7 +41,7 @@ export const TvDetails = props => (
         <h2>{props.name}</h2>
         <div dangerouslySetInnerHTML={createMarkup(props.summary)} />
 
-        <YouTube videoId={props.videoId} />
+        {props.videoId ? <YouTube videoId={props.videoId} /> : null}
 
       </div>
     </div>

@@ -14,32 +14,43 @@ import config from '../../config';
 class SingleTv extends Component {
   state = {
     trailerId: null,
+    showItem: null,
   };
   componentDidMount() {
     const self = this;
-    const {
-      showItem,
-    } = this.props.history.location.state;
-    if (showItem.id) {
-      const search = encodeURIComponent(`${showItem.name} Trailer`);
-      const youtubeSearchUrl = `${config.youtube.url}/search?q=${search}&key=${config.youtube.apiKey}&part=snippet`;
-      fetch(youtubeSearchUrl).then(res => res.json()).then(res => {
-        self.setState({
-          trailerId: res.items.length ? res.items[0].id.videoId : null,
+    const { id } = this.props.match.params;
+    if (this.props.history.location.state) {
+      const {
+        showItem,
+      } = this.props.history.location.state;
+      self.loadTrailer(showItem);
+    } else {
+      fetch(`https://api.tvmaze.com/shows/${id}`)
+        .then(res => res.json())
+        .then(res => {
+          self.loadTrailer(res);
         });
-      });
     }
   }
+  loadTrailer = showItem => {
+    const self = this;
+    const search = encodeURIComponent(`${showItem.name} tv trailer`);
+    const youtubeSearchUrl = `${config.youtube.url}/search?q=${search}&key=${config.youtube.apiKey}&part=snippet`;
+    fetch(youtubeSearchUrl).then(res => res.json()).then(res => {
+      self.setState({
+        trailerId: res.items.length ? res.items[0].id.videoId : null,
+        showItem,
+      });
+    });
+  };
   addOrRmoveWatchList = () => {
     const { id } = this.props.match.params;
-    const {
-      showItem,
-    } = this.props.history.location.state;
+    const { showItem } = this.state;
     if (this.props.user != null) {
       const { uid } = this.props.user;
       this.props.updateWatchlist(uid, showItem);
     } else {
-      alert('Please login -> ');
+      alert('Please login');
     }
   };
   close = () => {
@@ -49,7 +60,7 @@ class SingleTv extends Component {
     const { id } = this.props.match.params;
     const {
       showItem,
-    } = this.props.history.location.state;
+    } = this.state;
     const surfaceRender = this.props.history.action === 'POP';
     const showKeys = Object.keys(this.props.myshows || {});
     const alreadyInTheList = showKeys.length && showKeys.indexOf(id) !== -1;

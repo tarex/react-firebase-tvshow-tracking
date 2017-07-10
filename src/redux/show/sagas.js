@@ -54,7 +54,6 @@ function* searchRequest({ payload }) {
 export default function* showSagas() {
   yield all([
     takeEvery(showActions.LOAD_SHOWS, loadShows),
-    // takeEvery(showActions.SEARCH_REQUEST, searchRequest),
-    throttle(2000, showActions.SEARCH_REQUEST, searchRequest),
+    throttle(1000, showActions.SEARCH_REQUEST, searchRequest),
   ]);
 }

@@ -41,7 +41,9 @@
     "postpackage-functions": "cd functions && yarn",
     "local": "yarn run package-functions && firebase serve --only functions",
     "deploy-function": "yarn run package-functions && firebase deploy --only functions",
-    "deploy": "firebase deploy",
+    "deploy": "firebase deploy --except functions",
+    "predeploy": "yarn run build",
+    "postdeploy": "rimraf build",
     "toolbox": "react-toolbox-themr"
   }
 }
