@@ -6,7 +6,7 @@ const createMarkup = html => {
   return { __html: html };
 };
 const loadDefaultImage = event => {
-  event.target.src = 'http://via.placeholder.com/214x321';
+  event.target.src = 'http://via.placeholder.com/374x331';
 };
 
 export const TvDetails = props => (

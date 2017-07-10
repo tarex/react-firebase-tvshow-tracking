@@ -20,6 +20,11 @@
   overflow: hidden !important;
 }
 
+.tvModal iframe{
+  margin-top: 30px;
+  width: 100%;
+}
+
 @media only screen and (max-width: 991px) {
   .tvModal {
     width: 90vw !important;
@@ -58,9 +63,9 @@
 
 .tvdetails {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   /*align-items: center;*/
-  align-content: space-between;
+  /*align-content: space-between;*/
   overflow: hidden;
 }
 
@@ -172,22 +177,6 @@
   cursor: pointer;
 }
 
-.showItem button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.showItem > div{
-  height: 100%;
-}
-
-.showItem img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 @media only screen and (max-width: 767px) {
   .showItem {
     width: calc(100%/2) !important;
@@ -212,18 +201,44 @@
   }
 }
 
-.showItem:before {
+
+.showItem a{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  /*z-index: 2;*/
+}
+
+.showItem a:before {
   content: "";
-  width: calc(100% - 16px);
-  height: calc(100% - 16px);
+  width: 100%;
+  height: 100%;
   z-index: 1;
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 0;
+  left: 0;
   background: -moz-linear-gradient(top, rgba(34,34,34,0) 0%, rgba(34,34,34,0) 70%, rgba(34,34,34,1) 100%);
   background: -webkit-linear-gradient(top, rgba(34,34,34,0) 0%,rgba(34,34,34,0) 70%,rgba(34,34,34,1) 100%);
   background: linear-gradient(to bottom, rgba(34,34,34,0) 0%,rgba(34,34,34,0) 70%,rgba(34,34,34,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00222222', endColorstr='#e6222222',GradientType=0 );
+}
+
+.showItem button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+}
+
+.showItem > div{
+  height: 100%;
+}
+
+.showItem img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .showItemTitle {

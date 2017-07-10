@@ -16,21 +16,39 @@ export default class TvGrid extends Component {
     event.target.src = 'http://via.placeholder.com/214x321';
   };
 
+  handleClick = () => {
+    alert('click');
+  };
+
   showCard = (showItem, showIndex) => {
     let buttonLabel = 'Add to wishlist';
     let added = false;
 
     const image = showItem.image ? showItem.image.original : null;
     return (
-      <Card className="showItem">
-        <Button icon="notifications_active" floating mini />
-        <img
-          src={`${image}`}
-          style={{ width: '100%' }}
-          onError={this.loadDefaultImage}
+      <div className="showItem" key={showIndex}>
+        <Button
+          onClick={this.handleClick}
+          icon="notifications_active"
+          floating
+          mini
         />
-        <h4 className="showItemTitle">{showItem.name}</h4>
-      </Card>
+        <Link
+          to={{
+            pathname: `/tv/${showItem.id}`,
+            state: { modal: true, showItem },
+          }}>
+          <Card>
+            <img
+              src={`${image}`}
+              style={{ width: '100%' }}
+              onError={this.loadDefaultImage}
+            />
+
+            <h4 className="showItemTitle">{showItem.name}</h4>
+          </Card>
+        </Link>
+      </div>
     );
   };
 
