@@ -12,39 +12,46 @@ const loadDefaultImage = event => {
 export const TvDetails = props => (
   <div>
     <div className="tvdetails">
-      <div>
+      <div className="tvImage">
         <img
-          width="300px"
           src={`${props.image ? props.image.original : undefined}`}
           alt={props.name}
           onError={loadDefaultImage}
         />
       </div>
       <div className="tvsummary">
-        <Button
-          icon={
-            props.alreadyInTheList
-              ? 'notifications_off'
-              : 'notifications_active'
-          }
-          onClick={props.addOrRmoveWatchList}
-          floating
-          primary={props.alreadyInTheList == false}
+        <div className="tvTopbar">
+          <h2>{props.name}</h2>
+
+          <Button
+            icon={
+              props.alreadyInTheList
+                ? 'notifications_off'
+                : 'notifications_active'
+            }
+            className="tvNotification"
+            onClick={props.addOrRmoveWatchList}
+            floating
+            primary={props.alreadyInTheList == false}
+          />
+        </div>
+        <div
+          className="tvSummaryText"
+          dangerouslySetInnerHTML={createMarkup(props.summary)}
         />
-        <Button
-          onClick={props.addOrRmoveWatchList}
-          primary={props.alreadyInTheList === false}>
-          {props.alreadyInTheList
-            ? 'Remove from watchlist'
-            : 'Add to watchlist'}
-        </Button>
-        <h2>{props.name}</h2>
-        <div dangerouslySetInnerHTML={createMarkup(props.summary)} />
-
         {props.videoId ? <YouTube videoId={props.videoId} /> : null}
-
       </div>
     </div>
 
   </div>
 );
+
+{
+  /* <Button
+  onClick={props.addOrRmoveWatchList}
+  primary={props.alreadyInTheList === false}>
+  {props.alreadyInTheList
+    ? 'Remove from watchlist'
+    : 'Add to watchlist'}
+</Button> */
+}

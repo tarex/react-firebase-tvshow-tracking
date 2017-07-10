@@ -78,6 +78,7 @@ class SingleTv extends Component {
             </div>
           : <div>
               <Dialog
+                className="tvModal"
                 active={id ? true : false}
                 onEscKeyDown={this.close}
                 onOverlayClick={this.close}>
