@@ -5297,7 +5297,7 @@ promise@7.1.1, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.3, prop-types@^15.5.4, prop-types@^15.5.6:
+prop-types@^15.5.10, prop-types@^15.5.3, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -5455,6 +5455,16 @@ react-ga@^2.2.0:
     object-assign "^4.0.1"
     prop-types "^15.5.6"
 
+react-hold-animation@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-hold-animation/-/react-hold-animation-0.1.1.tgz#ffae3749670e754e8db2fb2d1bbe7aa23e8f8e5d"
+
+react-hold@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-hold/-/react-hold-0.2.1.tgz#23dc180fc7445c8c271d18dd8e3fcfdce1c7c32c"
+  dependencies:
+    hoist-non-react-statics "^1.2.0"
+
 react-loadable@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-4.0.3.tgz#296c5cdfba3d402d66d2120d52fc08c2ca1f3088"
@@ -5462,6 +5472,12 @@ react-loadable@^4.0.3:
     import-inspector "^2.0.0"
     is-webpack-bundle "^1.0.0"
     webpack-require-weak "^1.0.0"
+
+react-placeholder@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-placeholder/-/react-placeholder-1.0.5.tgz#88a5c2e657516d0c5318653645ca1f1bab72ee61"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-redux@^5.0.5:
   version "5.0.5"

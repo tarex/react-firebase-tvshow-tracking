@@ -9,6 +9,7 @@ export const RSF = new ReduxSagaFirebase(FirebaseApp);
 export const FirebaseDB = firebase.database();
 // firebase.database.enableLogging(false, false);
 export const FirebaseAuth = firebase.auth();
+
 export const FirebaseMsg = firebase.messaging();
 
 export const getFirebaseAuthProvider = provider => {
@@ -36,7 +37,6 @@ export const getFCMPermission = () =>
       console.log(err.message);
     });
 
-// did't bothered actions
 export const setFCMPerssionToken = uid => {
   getFCMPermission().then(token => {
     if (token !== undefined || token !== null) {

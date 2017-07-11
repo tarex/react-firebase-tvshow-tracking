@@ -4,7 +4,7 @@ import showActions from './actions';
 const initialState = new Record({
   loading: false,
   showList: [],
-  day: 0, // today
+  day: 0,
   error: null,
   suggestions: [],
 });

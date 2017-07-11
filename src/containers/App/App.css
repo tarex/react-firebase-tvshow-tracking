@@ -7,8 +7,13 @@
 .navigation {
   flex-grow: 1;
   text-align: right;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
-
+.restrictedNavigation {
+  display: flex;
+}
 .wrapper {
   margin-top: 50px;
   padding: 1.8rem;
@@ -111,6 +116,7 @@
 
 
 .tvsummary {
+  min-width: 60%;
   padding: 40px;
   padding-right: 40px;
   overflow-y: auto;
@@ -187,6 +193,12 @@
   .showItem {
     width: 100% !important;
   }
+  .restrictedNavigation {
+    display: none !important;
+  }
+  .mobileMenuTrigger {
+    display: block;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -198,6 +210,15 @@
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .showItem {
     width: calc(100%/5) !important;
+  }
+  .mobileMenuTrigger {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 480px)  {
+  .mobileMenuTrigger {
+    display: none !important;
   }
 }
 
@@ -269,7 +290,15 @@
   text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.mobileNav {
+  margin-top: 80px;
+}
+.mobileNav a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+.mobileNavItem:hover {
+  background-color: #eee !important;
+  cursor: pointer;
 }

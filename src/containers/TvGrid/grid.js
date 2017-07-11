@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactPlaceholder from 'react-placeholder';
 import {
   Card,
   CardMedia,
@@ -13,7 +14,7 @@ import config from '../../config';
 
 export default class TvGrid extends Component {
   loadDefaultImage = event => {
-    event.target.src = 'http://via.placeholder.com/214x321';
+    event.target.src = 'https://via.placeholder.com/214x321';
   };
 
   handleClick = () => {
@@ -24,30 +25,34 @@ export default class TvGrid extends Component {
     let buttonLabel = 'Add to wishlist';
     let added = false;
 
-    const image = showItem.image ? showItem.image.original : null;
+    const image = showItem.image
+      ? showItem.image.original.replace('http://', 'https://')
+      : null;
     return (
-      <div className="showItem" key={showIndex}>
+      <div className="showItem" key={showIndex} style={{ minHeight: '320px' }}>
         <Button
           onClick={this.handleClick}
           icon="notifications_active"
           floating
           mini
         />
-        <Link
-          to={{
-            pathname: `/tv/${showItem.id}`,
-            state: { modal: true, showItem },
-          }}>
-          <Card>
+        <ReactPlaceholder
+          type="rect"
+          ready={showItem.name != null}
+          showLoadingAnimation={true}>
+          <Link
+            to={{
+              pathname: `/tv/${showItem.id}`,
+              state: { modal: true, showItem },
+            }}>
             <img
               src={`${image}`}
-              style={{ width: '100%' }}
               onError={this.loadDefaultImage}
+              style={{ width: '100%' }}
             />
-
             <h4 className="showItemTitle">{showItem.name}</h4>
-          </Card>
-        </Link>
+          </Link>
+        </ReactPlaceholder>
       </div>
     );
   };
@@ -80,14 +85,4 @@ export default class TvGrid extends Component {
       </div>
     );
   }
-}
-
-{
-  /* <Link
-  className="showItem"
-  key={showIndex}
-  to={{
-    pathname: `/tv/${showItem.id}`,
-    state: { modal: true, showItem },
-  }}> */
 }

@@ -17,12 +17,27 @@ const Logo = props => (
 
 export default ({ login, toggleDrawerActive, loggedIn, user, logout }) => (
   <AppBar fixed>
+    <div>
+      <IconMenu
+        className="mobileMenuTrigger"
+        onClick={toggleDrawerActive}
+        icon="menu"
+        position="topLeft"
+        menuRipple
+        inverse
+      />
+    </div>
     <Logo />
     <Navigation type="horizontal" className="navigation">
       {loggedIn
-        ? <div>
+        ? <div className="restrictedNavigation">
             <Link to="/watchlist">
-              <Button icon="inbox" label="My List" flat inverse />
+              <Button
+                icon="playlist_add_check"
+                label="Watchlist"
+                flat
+                inverse
+              />
             </Link>
             {user ? <Button flat inverse>{user.displayName}</Button> : null}
             <IconMenu icon="more_vert" position="topRight" menuRipple inverse>
@@ -41,6 +56,7 @@ export default ({ login, toggleDrawerActive, loggedIn, user, logout }) => (
         : <Button onClick={login.bind(this, 'facebook')} raised>
             Login with Facebook
           </Button>}
+
     </Navigation>
   </AppBar>
 );

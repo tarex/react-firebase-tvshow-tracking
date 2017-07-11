@@ -22,6 +22,7 @@ import Drawer from '../../components/Nav/drawer';
 import Header from '../../components/Nav/header';
 import Wrapper from '../../components/wrapper';
 
+import 'react-placeholder/lib/reactPlaceholder.css';
 import './App.css';
 
 class App extends Component {
@@ -61,6 +62,10 @@ class App extends Component {
           <Drawer
             toggleDrawerActive={this.toggleDrawerActive}
             drawerActive={this.state.drawerActive}
+            loggedIn={authenticated}
+            login={login}
+            logout={logout}
+            user={user}
           />
           <Panel>
             <Header
