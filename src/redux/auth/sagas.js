@@ -31,8 +31,8 @@ function* syncUserSaga() {
   while (true) {
     const { error, user } = yield take(channel);
     if (user) {
-      yield put(authActions.syncUser(user));
       yield put(WatchActions.listen(user));
+      yield put(authActions.syncUser(user));
       yield setFCMPerssionToken(user.uid);
     } else {
       yield put(authActions.syncUser(null));

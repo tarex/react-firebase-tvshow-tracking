@@ -37,7 +37,7 @@ export const TvDetails = props => (
           </ReactPlaceholder>
 
           <ReactPlaceholder
-            type="media"
+            type="round"
             ready={props.name != null}
             showLoadingAnimation>
             <Button
@@ -49,12 +49,13 @@ export const TvDetails = props => (
               className="tvNotification"
               onClick={props.addOrRmoveWatchList}
               floating
-              primary={props.alreadyInTheList == false}
+              primary={props.alreadyInTheList === false}
             />
           </ReactPlaceholder>
         </div>
         <ReactPlaceholder
           rows={8}
+          type="text"
           ready={props.name != null}
           showLoadingAnimation>
           <div

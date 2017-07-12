@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import ReactPlaceholder from 'react-placeholder';
-import {
-  Card,
-  CardMedia,
-  CardTitle,
-  CardText,
-  CardActions,
-} from 'react-toolbox/lib/card';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Button from 'react-toolbox/lib/button/Button';
-import config from '../../config';
 
 export default class TvGrid extends Component {
   loadDefaultImage = event => {
@@ -22,9 +13,6 @@ export default class TvGrid extends Component {
   };
 
   showCard = (showItem, showIndex) => {
-    let buttonLabel = 'Add to wishlist';
-    let added = false;
-
     const image = showItem.image
       ? showItem.image.original.replace('http://', 'https://')
       : null;
@@ -47,6 +35,7 @@ export default class TvGrid extends Component {
             }}>
             <img
               src={`${image}`}
+              alt={showItem.name}
               onError={this.loadDefaultImage}
               style={{ width: '100%' }}
             />
@@ -64,7 +53,6 @@ export default class TvGrid extends Component {
       type,
       loadMore,
       showLoadMore,
-      showViewAll,
     } = this.props;
 
     return (
