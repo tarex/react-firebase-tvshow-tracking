@@ -4,6 +4,10 @@ const config = {
     url: '',
     imageUrl: '',
   },
+  youtube: {
+    url: 'https://www.googleapis.com/youtube/v3',
+    apiKey: '',
+  },
   tvurl: 'http://api.tvmaze.com',
   firebase: {
     apiKey: '',
