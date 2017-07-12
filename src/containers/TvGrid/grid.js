@@ -8,9 +8,7 @@ export default class TvGrid extends Component {
     event.target.src = 'https://via.placeholder.com/214x321';
   };
 
-  handleClick = () => {
-    alert('click');
-  };
+  handleClick = () => {};
 
   showCard = (showItem, showIndex) => {
     const image = showItem.image

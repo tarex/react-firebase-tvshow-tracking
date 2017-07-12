@@ -8,8 +8,6 @@ const app = express();
 app.use(cors({ origin: true }));
 
 app.get('/', async (req, res) => {
-  // need authorization
-  // need to use promise all
   const seriesWithUser = await getFirebaseData('seriesUser');
   const users = await getFirebaseData('users');
   const dailylist = await getFirebaseData('dailylist');

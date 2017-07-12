@@ -10,8 +10,6 @@ const countries = [
   { value: 'EN-en', label: 'USA' },
 ];
 
-// timezone should be automatic, ip track maybe
-// after delete should make a pop for feedback.
 class Settings extends Component {
   handleChange = value => {
     console.log(value);
