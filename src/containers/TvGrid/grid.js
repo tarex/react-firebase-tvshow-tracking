@@ -18,12 +18,6 @@ export default class TvGrid extends Component {
       : null;
     return (
       <div className="showItem" key={showIndex} style={{ minHeight: '320px' }}>
-        <Button
-          onClick={this.handleClick}
-          icon="notifications_active"
-          floating
-          mini
-        />
         <ReactPlaceholder
           type="rect"
           ready={showItem.name != null}
