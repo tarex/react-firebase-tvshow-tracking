@@ -1,0 +1,15 @@
+[debug] [2017-07-30T13:55:26.887Z] ----------------------------------------------------------------------
+[debug] [2017-07-30T13:55:26.889Z] Command:      /usr/local/Cellar/node/8.1.4/bin/node /usr/local/bin/firebase deploy --except functions
+[debug] [2017-07-30T13:55:26.889Z] CLI Version:  3.9.1
+[debug] [2017-07-30T13:55:26.889Z] Platform:     darwin
+[debug] [2017-07-30T13:55:26.889Z] Node Version: v8.1.4
+[debug] [2017-07-30T13:55:26.890Z] Time:         Sun Jul 30 2017 19:55:26 GMT+0600 (+06)
+[debug] [2017-07-30T13:55:26.890Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-07-30T13:55:26.901Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-07-30T13:55:26.901Z] > authorizing via signed-in user
+[debug] [2017-07-30T13:55:26.903Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/tvapp-ea52d  
+ Sun Jul 30 2017 19:55:26 GMT+0600 (+06)
+[debug] [2017-07-30T13:55:28.533Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-30T13:55:28.534Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/tvapp-ea52d/tokens  
+ Sun Jul 30 2017 19:55:28 GMT+0600 (+06)
