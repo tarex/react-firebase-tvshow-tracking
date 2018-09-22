@@ -14,7 +14,7 @@ It will send notification before airtime. ~ 15 min.
 - redux-toolbox
 - firebase
 - cloud functions
-- FCM
+- FCM [ For Push Notification ]
 ```
 
 used AWS lambda & CloudWatch for cron job.
